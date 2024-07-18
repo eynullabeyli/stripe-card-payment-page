@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -9,7 +10,8 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('index', { publishableKey: process.env.STRIPE_PUBLISH_KEY });
+  console.log(process.env.STRIPE_PUBLISH_KEY);
+  res.render('index', { publishableKey: process.env.STRIPE_PUBLISH_KEY });
 });
 
 app.post('/charge', async (req, res) => {
